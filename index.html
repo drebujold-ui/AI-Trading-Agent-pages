@@ -1,1 +1,195 @@
+AI Trading Agent — Command Center
 
+
+
+:root{ --bg:#071021;--panel:#0f2436;--accent:#00d4ff;--good:#00e676;--bad:#ff1744; --muted:#9fb5c8;--glass:rgba(255,255,255,0.03);
+}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial; background:linear-gradient(180deg,#04101a,#071021);color:#dfeffc}
+.header{height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;border-bottom:1px solid rgba(0,212,255,0.06)}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:42px;height:42px;border-radius:6px;background:linear-gradient(135deg,var(--accent),#0099cc);display:flex;align-items:center;justify-content:center;font-weight:700;color:#02101b;box-shadow:0 6px 30px rgba(0,212,255,0.08)}
+.brand h1{font-size:14px;letter-spacing:2px;margin:0}
+.header .meta{color:var(--muted);font-size:13px}
+.container{display:grid;grid-template-columns:1fr 1.6fr 0.9fr;gap:18px;padding:18px;height:calc(100vh - 64px);align-items:start}
+.panel{background:linear-gradient(180deg,var(--panel),rgba(15,36,54,0.85));border-radius:10px;padding:16px;border:1px solid rgba(0,212,255,0.04);box-shadow:0 8px 30px rgba(0,0,0,0.4);overflow:auto}
+.metrics{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{padding:12px;border-radius:8px;background:var(--glass);border:1px solid rgba(255,255,255,0.02)}
+.large{grid-column:1/-1;padding:16px;display:flex;flex-direction:column;gap:6px}
+.value{font-size:22px;color:var(--accent);font-weight:700}
+.small{font-size:12px;color:var(--muted)}
+.positions{display:flex;flex-direction:column;gap:10px;margin-top:10px}
+.pos{display:flex;justify-content:space-between;align-items:center;padding:10px;border-radius:8px;background:linear-gradient(90deg,rgba(255,255,255,0.02),transparent)}
+.pos .left{display:flex;flex-direction:column}
+.pos .pair{font-weight:700;color:#e8f9ff}
+.pos .meta{font-size:12px;color:var(--muted)}
+.right .pnl{font-weight:700}
+.right .good{color:var(--good)}
+.right .bad{color:var(--bad)}
+.chart-wrap{height:360px;padding:12px}
+.legend{display:flex;gap:12px;align-items:center;margin-top:8px;color:var(--muted);font-size:13px}
+.strat{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+.strategy{display:flex;justify-content:space-between;align-items:center}
+.bar{height:8px;background:rgba(0,212,255,0.06);border-radius:4px;overflow:hidden;flex:1;margin:0 12px}
+.fill{height:100%;background:linear-gradient(90deg,var(--accent),#008ab3)}
+.sessions{display:flex;gap:8px;margin-top:12px}
+.session{padding:8px;border-radius:6px;background:rgba(255,255,255,0.02);font-size:12px}
+.alerts{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+.alert{padding:8px;border-radius:6px;font-size:13px}
+.alert.info{background:rgba(0,212,255,0.04);color:var(--accent)}
+.alert.warn{background:rgba(255,197,0,0.04);color:#ffc400}
+.footer-note{font-size:12px;color:var(--muted);margin-top:12px}
+@media (max-width:1200px){.container{grid-template-columns:1fr;grid-auto-rows:auto;height:auto}}
+
+
+
+
+  AIAI TRADING AGENT
+  SYSTEM ONLINE ▪ UTC --:--:--
+
+
+
+
+  
+  
+    
+      LIVE SESSION
+      LONDON SESSION — ACTIVE
+    
+
+
+<div class="metrics" style="margin-top:12px">
+  <div class="card large">
+    <div class="small">SESSION P&L</div>
+    <div class="value" id="sessionPnL">$1,240.50</div>
+    <div class="small">+3.87% today</div>
+    <div style="margin-top:8px;height:8px;background:rgba(0,212,255,0.06);border-radius:6px;overflow:hidden">
+      <div id="pfill" style="width:65%;height:100%;background:linear-gradient(90deg,#00d4ff,#0099cc);"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="small">ACTIVE POSITIONS</div>
+    <div class="value" id="activeCount">2</div>
+    <div class="small">GBPUSD, USDJPY</div>
+  </div>
+
+  <div class="card">
+    <div class="small">WIN RATE</div>
+    <div class="value">72.5%</div>
+    <div class="small">21 wins / 8 losses</div>
+  </div>
+  <div class="card">
+    <div class="small">CURRENT RISK</div>
+    <div class="value">3.2%</div>
+    <div class="small">Exposure</div>
+  </div>
+</div>
+
+<div class="positions">
+  <div class="pos">
+    <div class="left">
+      <div class="pair">GBP / USD</div>
+      <div class="meta">Entry 1.2745  •  Stop 1.2680  •  Target 1.2850</div>
+    </div>
+    <div class="right"><div class="pnl good">+$520</div><div class="meta" style="text-align:right">+65 pips</div></div>
+  </div>
+
+  <div class="pos">
+    <div class="left">
+      <div class="pair">USD / JPY</div>
+      <div class="meta">Entry 154.32  •  Stop 153.85  •  Target 155.50</div>
+    </div>
+    <div class="right"><div class="pnl good">+$720</div><div class="meta" style="text-align:right">+118 pips</div></div>
+  </div>
+</div> </section>
+
+  
+
+  
+    
+      EQUITY / P&L
+      30-day view
+    
+
+
+<div class="chart-wrap">
+  <canvas id="equityChart"></canvas>
+</div>
+
+<div class="legend">
+  <div><span style="display:inline-block;width:12px;height:12px;background:var(--accent);border-radius:3px;margin-right:8px"></span>Account Equity</div>
+  <div><span style="display:inline-block;width:12px;height:12px;background:var(--bad);border-radius:3px;margin-right:8px"></span>Max Drawdown</div>
+</div>
+
+<div class="footer-note">Tip: click and drag on the chart to inspect points.</div>
+
+  
+
+
+  
+
+  
+    PORTFOLIO
+    
+      BALANCE$32,150
+      DAILY TARGET$200
+    
+
+
+<h3 style="color:var(--muted);margin-top:14px">STRATEGIES</h3>
+<div class="strat">
+  <div class="strategy"><div style="font-weight:700">London Trend</div><div class="small">35% • +$1,240</div></div>
+  <div class="bar"><div class="fill" style="width:35%"></div></div>
+
+  <div class="strategy"><div style="font-weight:700">NY Breakout</div><div class="small">28% • +$890</div></div>
+  <div class="bar"><div class="fill" style="width:28%"></div></div>
+
+  <div class="strategy"><div style="font-weight:700">Multi-TF Confluence</div><div class="small">37% • -$110</div></div>
+  <div class="bar"><div class="fill" style="width:37%;background:linear-gradient(90deg,#ff8a8a,#ff1744)"></div></div>
+</div>
+
+<h3 style="color:var(--muted);margin-top:14px">SESSIONS</h3>
+<div class="sessions">
+  <div class="session">TOKYO<br><small class="small">21:00-08:00</small></div>
+  <div class="session" style="border:1px solid rgba(0,230,118,0.12);background:linear-gradient(90deg,rgba(0,230,118,0.04),transparent)">LONDON<br><small class="small">08:00-16:30</small></div>
+  <div class="session">NEW YORK<br><small class="small">13:00-21:00</small></div>
+</div>
+
+<h3 style="color:var(--muted);margin-top:14px">ALERTS</h3>
+<div class="alerts">
+  <div class="alert info">NY session begins in 2 hours</div>
+  <div class="alert warn">Risk limit approaching 4% of account</div>
+</div> </aside>
+
+
+
+
+
+// ---------- Fake data (safe) ----------
+const fake = { account: {balance:32150}, equityHistory: Array.from({length:30}).map((_,i)=>({d:`Day ${i+1}`, eq:30000 + i*120 + (Math.random()-0.4)*800})), meta:{pnl:1240.5, pnlPct:3.87}
+};
+
+// Clock
+function startClock(){const el=document.getElementById('clock');setInterval(()=>{const t=new Date();el.textContent=t.toISOString().substr(11,8)},1000);} startClock();
+
+// Populate top metrics
+document.getElementById('sessionPnL').textContent = '$' + fake.meta.pnl.toFixed(2);
+document.getElementById('activeCount').textContent = 2;
+
+// Equity chart
+const ctx = document.getElementById('equityChart').getContext('2d');
+const labels = fake.equityHistory.map(x=>x.d);
+const dataEq = fake.equityHistory.map(x=>x.eq);
+const dataDd = fake.equityHistory.map((x,i)=>Math.min(...dataEq.slice(0,i+1)) - x.eq);
+const gradient = ctx.createLinearGradient(0,0,0,300); gradient.addColorStop(0,'rgba(0,212,255,0.18)'); gradient.addColorStop(1,'rgba(0,212,255,0.02)');
+
+new Chart(ctx, { type:'line', data:{labels, datasets:[
+    {label:'Equity', data:dataEq, borderColor:'#00d4ff', backgroundColor:gradient, fill:true, tension:0.35, pointRadius:0},
+    {label:'Drawdown', data:dataDd.map(v=>Math.abs(v)), borderColor:'#ff1744', backgroundColor:'transparent', borderDash:[6,6], fill:false, tension:0.35, pointRadius:0} ]}, options:{
+    responsive:true,
+    plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false}},
+    scales:{x:{grid:{color:'rgba(255,255,255,0.02)'}},y:{grid:{color:'rgba(255,255,255,0.02)'}}} }
+});
+
+// Tiny live simulation: change P&L bar width and value every 3s
+setInterval(()=>{ const delta = (Math.random()-0.45)*120; fake.meta.pnl = Math.max(-5000, fake.meta.pnl + delta); document.getElementById('sessionPnL').textContent = '$' + fake.meta.pnl.toFixed(2); const pct = Math.min(100, Math.max(4, 50 + fake.meta.pnl/20)); document.getElementById('pfill').style.width = pct + '%';
+},3000);
